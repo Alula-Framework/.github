@@ -1,4 +1,4 @@
-# Flight
+# Alula
 
 A modular server-side framework for Swift.
 
@@ -7,7 +7,7 @@ it, real-time layers on top of those, and persistence beside them. Six
 packages, each usable on its own.
 
 ```bash
-flight new MyService
+alula new MyService
 cd MyService && swift run MyService
 # → MyService is flying, on http://127.0.0.1:8080
 ```
@@ -20,25 +20,25 @@ endpoints, with nothing else running. `--tier basics` adds a database and
 
 | Repository | What it is |
 | --- | --- |
-| [flight](https://github.com/Flight-Framework/flight) | The framework: compile-time composition and lifecycle, configuration, HTTP, WebSockets, PubSub, Channels, Presence, actuator endpoints, and token authentication |
-| [flight-data](https://github.com/Flight-Framework/flight-data) | Persistence and caching: data-source protocols, an in-memory cache, migrations, and the PostgreSQL and Valkey drivers |
-| [flight-cli](https://github.com/Flight-Framework/flight-cli) | The `flight` command, the starter templates it generates, and the tutorial |
-| [flight-school](https://github.com/Flight-Framework/flight-school) | The interactive tutorial and documentation site for Flight, Hangar, and Changeset |
-| [hangar](https://github.com/Flight-Framework/hangar) | A typed query builder and repository for PostgreSQL. Usable outside Flight |
-| [hangar-vapor](https://github.com/Flight-Framework/hangar-vapor) | Hangar in a Vapor application: a pooled `Repo` per request, transactions that bind the ambient repo, and no Fluent to give up |
-| [swift-changeset](https://github.com/Flight-Framework/swift-changeset) | Ecto-style changesets: collect changes, validate, apply only what is valid and only what changed. No Flight dependency |
-| [flight-channels-js](https://github.com/Flight-Framework/flight-channels-js) | The browser and Node client for the Channels wire protocol |
+| [alula](https://github.com/Alula-Framework/alula) | The framework: compile-time composition and lifecycle, configuration, HTTP, WebSockets, PubSub, Channels, Presence, actuator endpoints, and token authentication |
+| [alula-data](https://github.com/Alula-Framework/alula-data) | Persistence and caching: data-source protocols, an in-memory cache, migrations, and the PostgreSQL and Valkey drivers |
+| [alula-cli](https://github.com/Alula-Framework/alula-cli) | The `alula` command, the starter templates it generates, and the tutorial |
+| [flight-school](https://github.com/Alula-Framework/flight-school) | The interactive tutorial and documentation site for Alula, Hangar, and Changeset |
+| [hangar](https://github.com/Alula-Framework/hangar) | A typed query builder and repository for PostgreSQL. Usable outside Alula |
+| [hangar-vapor](https://github.com/Alula-Framework/hangar-vapor) | Hangar in a Vapor application: a pooled `Repo` per request, transactions that bind the ambient repo, and no Fluent to give up |
+| [swift-changeset](https://github.com/Alula-Framework/swift-changeset) | Ecto-style changesets: collect changes, validate, apply only what is valid and only what changed. No Alula dependency |
+| [alula-channels-js](https://github.com/Alula-Framework/alula-channels-js) | The browser and Node client for the Channels wire protocol |
 
 ## Start here
 
-**[The tutorial](https://github.com/Flight-Framework/flight-cli/blob/main/TUTORIAL.md)**
+**[The tutorial](https://github.com/Alula-Framework/alula-cli/blob/main/TUTORIAL.md)**
 builds one application in three parts, each ending at a project you can
 download and run: configuration and HTTP, then a database, then a real-time
 chat room with presence and authentication. Every stage ends with a command
 and what you should see.
 
 If you would rather read code than prose, the
-[demo](https://github.com/Flight-Framework/flight-cli/tree/main/templates/demo)
+[demo](https://github.com/Alula-Framework/alula-cli/tree/main/templates/demo)
 is the finished application.
 
 ## What it looks like
@@ -71,15 +71,15 @@ struct UserController {
 ```
 
 There is no runtime container. Modules are values holding what they provide,
-and the generated `flightComposeModules` constructs them in the order the
+and the generated `alulaComposeModules` constructs them in the order the
 values themselves imply — so a missing dependency is a build error, not a
 resolution failure on the first request that needs it:
 
 ```swift
-await Flight.run(
+await Alula.run(
     configuration: try Configuration.load(),
-    modules: [FlightWebModule<FlightTransport>.self, AppModule.self],
-    composedBy: flightComposeModules)
+    modules: [AlulaWebModule<AlulaTransport>.self, AppModule.self],
+    composedBy: alulaComposeModules)
 ```
 
 ## Design
@@ -91,7 +91,7 @@ values. Nothing is looked up by type at request time, so the wiring either
 compiles or it doesn't — and the route handler holds its dependencies
 directly rather than reaching for a container.
 
-**Bring your own auth.** Flight validates tokens your identity provider
+**Bring your own auth.** Alula validates tokens your identity provider
 issued. There is no password hashing, no session store, and no token issuance
 anywhere in it — any OIDC-compliant provider is configuration, not a fork. The
 one security-critical primitive, signature verification, is delegated to
@@ -99,7 +99,7 @@ JWTKit.
 
 **No hand-rolled HTTP.** The default transport wraps HummingbirdCore rather
 than reimplementing HTTP/1.1 correctness, request-smuggling mitigations, and
-WebSocket framing. Flight owns routing and dispatch; a transport is a module,
+WebSocket framing. Alula owns routing and dispatch; a transport is a module,
 and any conforming one is a peer.
 
 **Take only what you use.** Products sit behind traits, so an application that
