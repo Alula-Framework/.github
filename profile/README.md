@@ -23,7 +23,7 @@ endpoints, with nothing else running. `--tier basics` adds a database and
 | [alula](https://github.com/Alula-Framework/alula) | The framework: compile-time composition and lifecycle, configuration, HTTP, WebSockets, PubSub, Channels, Presence, actuator endpoints, and token authentication |
 | [alula-data](https://github.com/Alula-Framework/alula-data) | Persistence and caching: data-source protocols, an in-memory cache, migrations, and the PostgreSQL and Valkey drivers |
 | [alula-cli](https://github.com/Alula-Framework/alula-cli) | The `alula` command, the starter templates it generates, and the tutorial |
-| [flight-school](https://github.com/Alula-Framework/flight-school) | The interactive tutorial and documentation site for Alula, Hangar, and Changeset |
+| [fledge](https://github.com/Alula-Framework/fledge) | The interactive tutorial and documentation site for Alula, Hangar, and Changeset |
 | [hangar](https://github.com/Alula-Framework/hangar) | A typed query builder and repository for PostgreSQL. Usable outside Alula |
 | [hangar-vapor](https://github.com/Alula-Framework/hangar-vapor) | Hangar in a Vapor application: a pooled `Repo` per request, transactions that bind the ambient repo, and no Fluent to give up |
 | [swift-changeset](https://github.com/Alula-Framework/swift-changeset) | Ecto-style changesets: collect changes, validate, apply only what is valid and only what changed. No Alula dependency |
